@@ -49,8 +49,8 @@ return array(
     /**
      * Configuration for: Default controller and action
      */
-    'DEFAULT_CONTROLLER' => 'index',
-    'DEFAULT_ACTION' => 'index',
+    'DEFAULT_CONTROLLER' => 'error',
+    'DEFAULT_ACTION' => 'error404',
     /**
      * Configuration for: Database
      * DB_TYPE The used database type. Note that other types than "mysql" might break the db construction currently.
