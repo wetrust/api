@@ -38,7 +38,7 @@ class Csrf
         $csrf_token  = Session::get('csrf_token');
 
         if ($max_time + $stored_time <= time() || empty($csrf_token)) {
-            Session::set('csrf_token', md5(uniqid(rand(), true)));
+            Session::set('csrf_token', password_hash(uniqid(rand(), true), PASSWORD_DEFAULT));
             Session::set('csrf_token_time', time());
         }
 
