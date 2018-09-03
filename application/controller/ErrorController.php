@@ -23,6 +23,16 @@ class ErrorController extends Controller
     public function error404()
     {
         header('HTTP/1.0 404 Not Found', true, 404);
-        $this->View->render('error/404');
+        $response = new stdClass();
+        $response->result = false;
+        $this->View->renderJSON($response);
+    }
+
+    public function error401()
+    {
+        header('HTTP/1.0 401 Unauthorized', true, 401);
+        $response = new stdClass();
+        $response->result = false;
+        $this->View->renderJSON($response);
     }
 }
