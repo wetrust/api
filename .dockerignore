@@ -6,3 +6,4 @@ CHANGELOG.md
 composer.dockerfile
 docker-compose.yml
 web.dockerfile
+composer.lock
