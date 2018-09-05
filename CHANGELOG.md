@@ -1,9 +1,13 @@
 # CHANGE LOG
 
-For the newest (und unstable) version always check the develop branch, for beta check 
-master branch, for really stable stuff check the releases (the ones that have a real version number :))
+## Wetrust/api master branch
 
-## master branch
+- [cristophernic] Dockerizar Panique/Huge 
+- [cristophernic] Añadir archivos con configuraciones personalizadas de nginx para migrar sistema de apache a nginx
+- [cristophernic] Mejorar .gitignore y añadir .dockerignore para futuro proceso de contrucción basado en contenedores docker
+- [cristophernic] Eliminar todos los archivos que no son indispensables para el funcionamiento del api, eliminar archivos de apache
+
+## Panique/Huge master branch
 
 - [slaveek/panique] [PR](https://github.com/panique/huge/pull/773) [#770] fix for sending user back to last visited page after login
 - [slaveek] [PR](https://github.com/panique/huge/pull/815) lots of code styling fixes 
