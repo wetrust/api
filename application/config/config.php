@@ -35,6 +35,12 @@ return array(
      */
     'URL' => 'http://' . $_SERVER['HTTP_HOST'] . str_replace('public', '', dirname($_SERVER['SCRIPT_NAME'])),
     /**
+     * Configuration for: JSON Response
+     * Security CORS.
+     */
+    //'ACCESS' => "Access-Control-Allow-Origin: *." . $_SERVER['HTTP_HOST'], FOR live server
+    'ACCESS' => "Access-Control-Allow-Origin: *",
+    /**
      * Configuration for: Folders
      * Usually there's no reason to change this.
      */

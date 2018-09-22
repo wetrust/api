@@ -77,6 +77,7 @@ class View
      */
     public function renderJSON($data)
     {
+        header(Config::get('ACCESS'));
         header("Content-Type: application/json");
         echo json_encode($data);
     }
@@ -172,6 +173,7 @@ class View
      */
     public function encodeHTML($str)
     {
+        $str = trim($str); //eliminar espacios delante y atras
         return htmlentities($str, ENT_QUOTES, 'UTF-8');
     }
 }
