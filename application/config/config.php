@@ -62,10 +62,10 @@ return array(
      * DB_CHARSET The charset, necessary for security reasons. Check Database.php class for more info.
      */
     'DB_TYPE' => 'mysql',
-    'DB_HOST' => '127.0.0.1',
-    'DB_NAME' => 'huge',
+    'DB_HOST' => 'db',
+    'DB_NAME' => 'hugex',
     'DB_USER' => 'root',
-    'DB_PASS' => '12345678',
+    'DB_PASS' => 'test',
     'DB_PORT' => '3306',
     'DB_CHARSET' => 'utf8',
     /**
@@ -99,6 +99,7 @@ return array(
     'COOKIE_DOMAIN' => "",
     'COOKIE_SECURE' => false,
     'COOKIE_HTTP' => true,
+    'COOKIE_NAME' => "HUGEx",
     'SESSION_RUNTIME' => 604800,
     /**
      * Configuration for: Avatars/Gravatar support
