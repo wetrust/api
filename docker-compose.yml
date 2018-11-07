@@ -9,6 +9,7 @@ services:
     restart: always
     links:
       - web
+      - adminer
     ports:
       - "80:80"
   web:
@@ -35,7 +36,5 @@ services:
     ports:
       - "3306:3306"
   adminer:
-    image: adminer
+    image: adminer:fastcgi
     restart: always
-    ports:
-      - 8080:8080
