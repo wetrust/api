@@ -9,7 +9,6 @@ services:
     restart: always
     links:
       - web
-      - adminer
     ports:
       - "80:80"
   web:
@@ -35,6 +34,3 @@ services:
       MYSQL_PASSWORD: aSdF123
     ports:
       - "3306:3306"
-  adminer:
-    image: adminer:fastcgi
-    restart: always
