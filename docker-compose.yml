@@ -6,6 +6,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - .:/opt/app
+      - ./letsencrypt/certs:/etc/letsencrypt/
     restart: always
     links:
       - web
