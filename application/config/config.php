@@ -38,7 +38,7 @@ return array(
      * Configuration for: JSON Response
      * Security CORS.
      */
-    //'ACCESS' => "Access-Control-Allow-Origin: *." . $_SERVER['HTTP_HOST'], FOR live server
+    //'ACCESS' => "Access-Control-Allow-Origin: *.domain", FOR live server
     'ACCESS' => "Access-Control-Allow-Origin: *",
     /**
      * Configuration for: Folders
@@ -62,16 +62,20 @@ return array(
      * DB_TYPE The used database type. Note that other types than "mysql" might break the db construction currently.
      * DB_HOST The mysql hostname, usually localhost or 127.0.0.1
      * DB_NAME The database name
-     * DB_USER The username
-     * DB_PASS The password
+     * DB_USER_R The username for only read data
+     * DB_PASS_R The password for only read data
+     * DB_USER_W The username for write data
+     * DB_PASS_W The password for write data
      * DB_PORT The mysql port, 3306 by default (?), find out via phpinfo() and look for mysqli.default_port.
      * DB_CHARSET The charset, necessary for security reasons. Check Database.php class for more info.
      */
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'db',
     'DB_NAME' => 'hugex',
-    'DB_USER' => 'root',
-    'DB_PASS' => 'test',
+    'DB_USER_R' => 'demo',
+    'DB_PASS_R' => 'aSdF123',
+    'DB_USER_W' => 'demo',
+    'DB_PASS_W' => 'aSdF123',
     'DB_PORT' => '3306',
     'DB_CHARSET' => 'utf8',
     /**
@@ -100,9 +104,9 @@ return array(
      * COOKIE_HTTP: If set to true, Cookies that can't be accessed by JS - Highly recommended!
      * SESSION_RUNTIME: How long should a session cookie be valid by seconds, 604800 = 1 week.
      */
-    'COOKIE_RUNTIME' => 1209600,
+    'COOKIE_RUNTIME' => 604800,
     'COOKIE_PATH' => '/',
-    'COOKIE_DOMAIN' => "",
+    'COOKIE_DOMAIN' => ".localhost",
     'COOKIE_SECURE' => false,
     'COOKIE_HTTP' => true,
     'COOKIE_NAME' => "HUGEx",

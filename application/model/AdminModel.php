@@ -55,7 +55,7 @@ class AdminModel
      */
     private static function writeDeleteAndSuspensionInfoToDatabase($userId, $suspensionTime, $delete)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $query = $database->prepare("UPDATE users SET user_suspension_timestamp = :user_suspension_timestamp, user_deleted = :user_deleted  WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(
@@ -79,7 +79,7 @@ class AdminModel
      */
     private static function resetUserSession($userId)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $query = $database->prepare("UPDATE users SET session_id = :session_id  WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(

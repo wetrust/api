@@ -4,7 +4,7 @@
  * Class DatabaseFactory
  *
  * Use it like this:
- * $database = DatabaseFactory::getFactory()->getConnection();
+ * $database = DatabaseFactory::getFactory()->getConnection(False);
  *
  * That's my personal favourite when creating a database connection.
  * It's a slightly modified version of Jon Raphaelson's excellent answer on StackOverflow:
@@ -22,8 +22,12 @@
 class DatabaseFactory
 {
     private static $factory;
-    private $database;
+    private $databaseR;
+    private $databaseW;
 
+    /**
+     * Crea o retorna el puntero solo lectura o escritura
+     */
     public static function getFactory()
     {
         if (!self::$factory) {
@@ -32,33 +36,53 @@ class DatabaseFactory
         return self::$factory;
     }
 
-    public function getConnection() {
-        if (!$this->database) {
+    public function getConnection($mode) {
 
-            /**
-             * Check DB connection in try/catch block. Also when PDO is not constructed properly,
-             * prevent to exposing database host, username and password in plain text as:
-             * PDO->__construct('mysql:host=127....', 'root', '12345678', Array)
-             * by throwing custom error message
-             */
-            try {
-                $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
-                $this->database = new PDO(
-                   Config::get('DB_TYPE') . ':host=' . Config::get('DB_HOST') . ';dbname=' .
-                   Config::get('DB_NAME') . ';port=' . Config::get('DB_PORT') . ';charset=' . Config::get('DB_CHARSET'),
-                   Config::get('DB_USER'), Config::get('DB_PASS'), $options
-                   );
-            } catch (PDOException $e) {
+        if ($mode === true){
+            if (!$this->databaseW) {
 
-                // Echo custom message. Echo error code gives you some info.
-                echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
-                echo 'Error code: ' . $e->getCode();
+                try {
+                    $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+                    $this->databaseW = new PDO(
+                    Config::get('DB_TYPE') . ':host=' . Config::get('DB_HOST') . ';dbname=' .
+                    Config::get('DB_NAME') . ';port=' . Config::get('DB_PORT') . ';charset=' . Config::get('DB_CHARSET'),
+                    Config::get('DB_USER_W'), Config::get('DB_PASS_W'), $options
+                    );
+                } catch (PDOException $e) {
 
-                // Stop application :(
-                // No connection, reached limit connections etc. so no point to keep it running
-                exit;
+                    // Echo custom message. Echo error code gives you some info.
+                    echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
+                    echo 'Error code: ' . $e->getCode();
+
+                    // Stop application :(
+                    // No connection, reached limit connections etc. so no point to keep it running
+                    exit;
+                }
             }
+            return $this->databaseW;
         }
-        return $this->database;
+        else{
+            if (!$this->databaseR) {
+
+                try {
+                    $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+                    $this->databaseR = new PDO(
+                    Config::get('DB_TYPE') . ':host=' . Config::get('DB_HOST') . ';dbname=' .
+                    Config::get('DB_NAME') . ';port=' . Config::get('DB_PORT') . ';charset=' . Config::get('DB_CHARSET'),
+                    Config::get('DB_USER_R'), Config::get('DB_PASS_R'), $options
+                    );
+                } catch (PDOException $e) {
+
+                    // Echo custom message. Echo error code gives you some info.
+                    echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
+                    echo 'Error code: ' . $e->getCode();
+
+                    // Stop application :(
+                    // No connection, reached limit connections etc. so no point to keep it running
+                    exit;
+                }
+            }
+            return $this->databaseR;
+        }
     }
 }

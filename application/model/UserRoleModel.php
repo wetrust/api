@@ -46,7 +46,7 @@ class UserRoleModel
             return false;
         }
 
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $query = $database->prepare("UPDATE users SET user_account_type = :new_type WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(

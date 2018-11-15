@@ -47,7 +47,7 @@ class AvatarModel
      */
     public static function getPublicUserAvatarFilePathByUserId($user_id)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(False);
 
         $query = $database->prepare("SELECT user_has_avatar FROM users WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(':user_id' => $user_id));
@@ -138,7 +138,7 @@ class AvatarModel
      */
     public static function writeAvatarToDatabase($user_id)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $query = $database->prepare("UPDATE users SET user_has_avatar = TRUE WHERE user_id = :user_id LIMIT 1");
         $query->execute(array(':user_id' => $user_id));
@@ -217,7 +217,7 @@ class AvatarModel
         // try to delete image, but still go on regardless of file deletion result
         self::deleteAvatarImageFile($userId);
 
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $sth = $database->prepare("UPDATE users SET user_has_avatar = 0 WHERE user_id = :user_id LIMIT 1");
         $sth->bindValue(":user_id", (int)$userId, PDO::PARAM_INT);

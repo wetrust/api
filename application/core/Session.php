@@ -78,7 +78,7 @@ class Session
      */
     public static function updateSessionId($userId, $sessionId = null)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
         $sql = "UPDATE users SET session_id = :session_id WHERE user_id = :user_id";
 
         $query = $database->prepare($sql);
@@ -110,7 +110,7 @@ class Session
 
         if (isset($userId) && isset($session_id)) {
 
-            $database = DatabaseFactory::getFactory()->getConnection();
+            $database = DatabaseFactory::getFactory()->getConnection(False);
             $sql = "SELECT session_id FROM users WHERE user_id = :user_id LIMIT 1";
 
             $query = $database->prepare($sql);

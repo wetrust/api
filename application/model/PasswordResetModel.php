@@ -66,7 +66,7 @@ class PasswordResetModel
      */
     public static function setPasswordResetDatabaseToken($user_name, $user_password_reset_hash, $temporary_timestamp)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $sql = "UPDATE users
                 SET user_password_reset_hash = :user_password_reset_hash, user_password_reset_timestamp = :user_password_reset_timestamp
@@ -125,7 +125,7 @@ class PasswordResetModel
      */
     public static function verifyPasswordReset($user_name, $verification_code)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(False);
 
         // check if user-provided username + verification code combination exists
         $sql = "SELECT user_id, user_password_reset_timestamp
@@ -175,7 +175,7 @@ class PasswordResetModel
      */
     public static function saveNewUserPassword($user_name, $user_password_hash, $user_password_reset_hash)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $sql = "UPDATE users SET user_password_hash = :user_password_hash, user_password_reset_hash = NULL,
                        user_password_reset_timestamp = NULL
@@ -267,7 +267,7 @@ class PasswordResetModel
      */
     public static function saveChangedPassword($user_name, $user_password_hash)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(True);
 
         $sql = "UPDATE users SET user_password_hash = :user_password_hash
                  WHERE user_name = :user_name
@@ -326,7 +326,7 @@ class PasswordResetModel
      */
     public static function validatePasswordChange($user_name, $user_password_current, $user_password_new, $user_password_repeat)
     {
-        $database = DatabaseFactory::getFactory()->getConnection();
+        $database = DatabaseFactory::getFactory()->getConnection(False);
 
         $sql = "SELECT user_password_hash, user_failed_logins FROM users WHERE user_name = :user_name LIMIT 1;";
         $query = $database->prepare($sql);
